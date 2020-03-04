@@ -7,8 +7,8 @@ import { SpecialtyService } from './specialty.service'
 export class SpecialtyResolver {
     constructor(private readonly specialtyService: SpecialtyService) {}
 
-    @Query(() => [Specialty])
-    async specialties(): Promise<Specialty[]> {
+    @Query(() => [Specialty], { name: 'specialties' })
+    async getSpecialties(): Promise<Specialty[]> {
         return this.specialtyService.findAll()
     }
 }

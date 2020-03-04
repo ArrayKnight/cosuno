@@ -39,19 +39,26 @@ export class Company {
     specialties: Specialty[]
 }
 
+// TODO abstract out all pagination logic and models into generic implementation
+@ObjectType()
+export class PageMetadata {
+    @Field(() => Int)
+    index: number
+
+    @Field(() => Int)
+    size: number
+
+    @Field(() => Int)
+    total: number
+}
+
 @ObjectType()
 export class PaginatedCompanies {
     @Field(() => [Company])
     results: Company[]
 
-    @Field(() => Int)
-    pageIndex: number
-
-    @Field(() => Int)
-    pageSize: number
-
-    @Field(() => Int)
-    pageTotal: number
+    @Field()
+    page: PageMetadata
 }
 
 @ArgsType()
@@ -61,6 +68,10 @@ export class CompanyArgs {
 
     @Field(() => [Int], { nullable: true })
     specialties?: number[]
+
+    // TODO add operator (AND | OR) to determine how to match specialties (match all vs match any)
+
+    // TODO add sorting options (relevance, name ascending/descending)
 
     @Field(() => Int, { nullable: true })
     @Min(0)
