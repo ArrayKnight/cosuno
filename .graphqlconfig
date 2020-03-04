@@ -1,0 +1,15 @@
+{
+    "projects": {
+        "cosuno": {
+            "schemaPath": "./src/graphql/schema.graphql",
+            "extensions": {
+                "endpoints": {
+                    "local": {
+                        "url": "http://localhost:3000/graphql/",
+                        "introspect": true
+                    }
+                }
+            }
+        }
+    }
+}
