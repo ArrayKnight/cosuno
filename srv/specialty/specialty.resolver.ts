@@ -3,12 +3,12 @@ import { Query, Resolver } from '@nestjs/graphql'
 import { Specialty } from './specialty.model'
 import { SpecialtyService } from './specialty.service'
 
-@Resolver((of) => Specialty)
+@Resolver(() => Specialty)
 export class SpecialtyResolver {
     constructor(private readonly specialtyService: SpecialtyService) {}
 
     @Query(() => [Specialty], { name: 'specialties' })
-    async getSpecialties(): Promise<Specialty[]> {
+    getSpecialties(): Specialty[] {
         return this.specialtyService.findAll()
     }
 }

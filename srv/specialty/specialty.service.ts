@@ -14,7 +14,7 @@ export class SpecialtyService {
         return ids.reduce((found, id) => {
             const specialty = this.findOneById(id)
 
-            if (!!specialty) {
+            if (specialty) {
                 return [...found, specialty]
             }
 
@@ -25,6 +25,6 @@ export class SpecialtyService {
     findOneById(id: number): Specialty | null {
         const specialty = specialties.find((specialty) => specialty.id === id)
 
-        return !!specialty ? { ...specialty } : null
+        return specialty ? { ...specialty } : null
     }
 }

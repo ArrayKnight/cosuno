@@ -12,19 +12,16 @@ export class CompanyResolver {
     ) {}
 
     @Query(() => PaginatedCompanies, { name: 'companies' })
-    async getCompanies(
+    getCompanies(
         @Args()
         args: CompanyArgs,
-    ): Promise<PaginatedCompanies> {
-        const search = args.search ?? ''
+    ): PaginatedCompanies {
+        const search = `${args.search ?? ''}`.trim()
         const specialties = args.specialties ?? []
         const index = args.pageIndex ?? 0
         const size = args.pageSize ?? -1
         const shouldPaginate = size > 0
-        const companies = (this.companyService.findAllWith(
-            search,
-            specialties,
-        ) as unknown) as Company[] // TODO remove type casting (@ResolveProperty('specialties') below converts CompanyDB to Company, but service doesn't know)
+        const companies = this.companyService.findAllWith(search, specialties)
         const results = shouldPaginate
             ? companies.slice(index * size, index * size + size)
             : companies
@@ -41,8 +38,8 @@ export class CompanyResolver {
         }
     }
 
-    @ResolveProperty('specialties', (returns) => [Specialty])
-    async getSpecialties(@Parent() { specialties }): Promise<Specialty[]> {
+    @ResolveProperty('specialties', () => [Specialty])
+    getSpecialties(@Parent() { specialties }): Specialty[] {
         return this.specialtyService.findManyByIds(specialties)
     }
 }

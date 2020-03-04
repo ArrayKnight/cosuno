@@ -55,7 +55,7 @@ export class PageMetadata {
 @ObjectType()
 export class PaginatedCompanies {
     @Field(() => [Company])
-    results: Company[]
+    results: CompanyDB[]
 
     @Field()
     page: PageMetadata

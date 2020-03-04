@@ -34,18 +34,18 @@
         ],
         "react/display-name": [0]
     },
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "detect"
+        }
+    },
     "overrides": [
         {
             "files": ["src/**/*.{ts,tsx}"],
             "env": {
                 "browser": true,
                 "es6": true
-            },
-            "settings": {
-                "react": {
-                    "pragma": "React",
-                    "version": "detect"
-                }
             }
         },
         {

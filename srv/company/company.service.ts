@@ -20,7 +20,8 @@ export class CompanyService {
 
         return this.findAll().filter(
             (company) =>
-                (!filterByName || company.name.includes(name)) &&
+                (!filterByName ||
+                    company.name.toLowerCase().includes(name.toLowerCase())) &&
                 (!filterBySpecialties ||
                     company.specialties.some((id) => specialties.includes(id))),
         )
