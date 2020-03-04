@@ -12,7 +12,5 @@ import { SpecialtyModule } from './specialty'
             autoSchemaFile: true,
         }),
     ],
-    controllers: [],
-    providers: [],
 })
 export class AppModule {}

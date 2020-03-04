@@ -23,9 +23,12 @@ export const specialties: Specialty[] = [
     'Specialties',
     'Equipment',
     'Special Construction',
-    'Mechanical/Plumbing',
+    'Mechanical',
+    'Plumbing',
     'Electrical',
-].map((name, id) => ({ id, name }))
+]
+    .sort()
+    .map((name, id) => ({ id, name }))
 
 interface Company {
     id: number
@@ -43,11 +46,15 @@ export const companies: Company[] = new Array(
         id: index,
         name: capitalCase(lipsum.generateWords(Math.ceil(Math.random() + 0.5))),
         logo: `https://picsum.photos/id/${index}/480/360`,
-        location: `${capitalCase(lipsum.generateWords(1))}, ${lipsum
-            .generateWords(2)
-            .split(' ')
-            .map((word) => word.charAt(0).toUpperCase())
-            .join('')} ${Math.round(Math.random() * 100000)}`,
+        location: [
+            `${capitalCase(lipsum.generateWords(1))},`,
+            lipsum
+                .generateWords(2)
+                .split(' ')
+                .map((word) => word.charAt(0).toUpperCase())
+                .join(''),
+            Math.round(Math.random() * 100000),
+        ].join(' '),
         specialties: sampleSize(specialties, Math.floor(Math.random() * 4)).map(
             ({ id }) => id,
         ),
