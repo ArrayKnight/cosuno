@@ -1,5 +1,7 @@
 # Cosuno Coding Challenge
 
+### `npm install && npm start`
+
 ## Instructions
 
 Create a simple React application that shows a list of construction companies, each with the following information:
@@ -18,7 +20,11 @@ Create a simple API based on Node.js that returns the list of companies to the f
 
 In addition, make a list of ideas on how you would improve this application if you had more time to work on it.
 
-## Getting Started
+### Application improvements
 
--   `npm install`
--   `npm start`
+Be sure to search through the code for `TODO`, but here are the highlights:
+
+-   Testing: implement Jest & React Testing Library for unit and integration tests, TestCafe/Cypress for end-to-end testing of the entire application
+-   Dev Experience: limit NestJS file watching to the `srv` folder only, it currently rebuilds the server on changes to any file in the repo
+-   Abstract Generic Logic: the pagination logic shouldn't be implemented directly in the Company resolver, it should be generic and re-useable for any resolver
+-   Operators & Sorting: add filtering operators to change the filtering behavior, add sorting options to switch between relevance & alpha
