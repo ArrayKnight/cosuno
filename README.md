@@ -29,7 +29,10 @@ In addition, make a list of ideas on how you would improve this application if y
 
 Be sure to search through the code for `TODO`, but here are the highlights:
 
+-   Documentation: implement Storybook to visually validate individual components while providing implementation details
 -   Testing: implement Jest & React Testing Library for unit and integration tests, TestCafe/Cypress for end-to-end testing of the entire application
--   Dev Experience: limit NestJS file watching to the `srv` folder only, it currently rebuilds the server on changes to any file in the repo
 -   Abstract Generic Logic: the pagination logic shouldn't be implemented directly in the Company resolver, it should be generic and re-useable for any resolver
 -   Operators & Sorting: add filtering operators to change the filtering behavior, add sorting options to switch between relevance & alpha
+-   Dev Experience: limit NestJS file watching to the `srv` folder only, it currently rebuilds the server on changes to any file in the repo
+-   Build scripts: setup production deployment scripts with any additional tree shaking/optimizations
+-   Offline GraphQL codegen: research if it's possible to do something similar to the introspection to generate hooks/schema without running the server

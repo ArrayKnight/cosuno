@@ -12,10 +12,10 @@ export class CompanyResolver {
     ) {}
 
     @Query(() => PaginatedCompanies, { name: 'companies' })
-    getCompanies(
+    async getCompanies(
         @Args()
         args: CompanyArgs,
-    ): PaginatedCompanies {
+    ): Promise<PaginatedCompanies> {
         const search = `${args.search ?? ''}`.trim()
         const specialties = args.specialties ?? []
         const index = args.pageIndex ?? 0
@@ -39,7 +39,7 @@ export class CompanyResolver {
     }
 
     @ResolveProperty('specialties', () => [Specialty])
-    getSpecialties(@Parent() { specialties }): Specialty[] {
+    async getSpecialties(@Parent() { specialties }): Promise<Specialty[]> {
         return this.specialtyService.findManyByIds(specialties)
     }
 }

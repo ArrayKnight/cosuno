@@ -1,5 +1,6 @@
 import React, { memo, ReactElement, useState } from 'react'
 
+import { PAGE_SIZES } from '~/common'
 import {
     CompaniesQueryVariables,
     useCompaniesQuery,
@@ -9,21 +10,27 @@ import { Search } from './Search'
 
 export default memo(
     (): ReactElement => {
-        const [pageIndex, setPageIndex] = useState(0)
-        const [pageSize, setPageSize] = useState(12)
-        const [search, setSearch] = useState('')
-        const [specialties, setSpecialties] = useState<
-            CompaniesQueryVariables['specialties']
-        >([])
-        const companiesQuery = useCompaniesQuery({
-            variables: {
-                search,
-                specialties,
-                pageIndex,
-                pageSize,
-            },
+        const [variables, setVariables] = useState<CompaniesQueryVariables>({
+            search: '',
+            specialties: [],
+            pageIndex: 0,
+            pageSize: PAGE_SIZES[0],
         })
+        const companiesQuery = useCompaniesQuery({ variables })
         const specialtiesQuery = useSpecialtiesQuery()
+
+        function set<
+            K extends keyof CompaniesQueryVariables,
+            V extends CompaniesQueryVariables[K]
+        >(key: K): (value: V) => void {
+            return (value) => {
+                setVariables({
+                    ...variables,
+                    pageIndex: 0,
+                    [key]: value,
+                })
+            }
+        }
 
         return (
             <Search
@@ -40,10 +47,10 @@ export default memo(
                     }
                 }
                 specialties={specialtiesQuery.data?.specialties || []}
-                setSearch={setSearch}
-                setSpecialties={setSpecialties}
-                setPageIndex={setPageIndex}
-                setPageSize={setPageSize}
+                setSearch={set('search')}
+                setSpecialties={set('specialties')}
+                setPageIndex={set('pageIndex')}
+                setPageSize={set('pageSize')}
             />
         )
     },

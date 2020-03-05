@@ -3,7 +3,6 @@ import {
     Avatar,
     CardContent,
     CardHeader,
-    Chip,
     Grid,
     Typography,
 } from '@material-ui/core'
@@ -20,9 +19,9 @@ import {
     StoreTwoTone,
 } from '@material-ui/icons'
 
-import { Company as CompanyType } from '~/graphql'
-import { Root, CardMedia, Media } from './styled'
 import { SpecialtyIcon } from '~/common'
+import { Company as CompanyType } from '~/graphql'
+import { Root, CardMedia, Chip, Media } from './styled'
 
 const icons = [
     AccountBalanceTwoTone,

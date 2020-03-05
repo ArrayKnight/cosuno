@@ -1,10 +1,22 @@
 import styled from '@emotion/styled'
-import { Card as CardBase, CardMedia as CardMediaBase } from '@material-ui/core'
+import {
+    Card as CardBase,
+    CardMedia as CardMediaBase,
+    Chip as ChipBase,
+} from '@material-ui/core'
 
 import { theme } from '~/common'
 
 export const Root = styled(CardBase)`
     height: 100%;
+
+    .MuiCardHeader-title {
+        font-weight: 600;
+    }
+
+    .MuiTypography-overline {
+        font-weight: 500;
+    }
 `
 
 export const Media = styled.div`
@@ -44,5 +56,14 @@ export const CardMedia = styled(CardMediaBase)`
         bottom: 0;
         left: 0;
         opacity: 0.25;
+    }
+`
+
+export const Chip = styled(ChipBase)`
+    .MuiAvatar-root {
+        width: 30px;
+        height: 30px;
+        margin-left: 0;
+        color: ${theme.palette.common.white};
     }
 `

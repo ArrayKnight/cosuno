@@ -57,7 +57,7 @@ export const companies: Company[] = new Array(
                 .join(''),
             Math.round(Math.random() * 100000),
         ].join(' '),
-        specialties: sampleSize(specialties, Math.floor(Math.random() * 4)).map(
-            ({ id }) => id,
-        ),
+        specialties: sampleSize(specialties, Math.floor(Math.random() * 4))
+            .sort((a, b) => (a.id === b.id ? 0 : a.id > b.id ? 1 : -1))
+            .map(({ id }) => id),
     }))
