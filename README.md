@@ -2,6 +2,11 @@
 
 ### `npm install && npm start`
 
+Once the project is running:
+
+-   Feel free to explore the server @ [http://localhost:3000/graphql](http://localhost:3000/graphql)
+-   Test out the client functionality @ [http://localhost:3333/](http://localhost:3333/)
+
 ## Instructions
 
 Create a simple React application that shows a list of construction companies, each with the following information:

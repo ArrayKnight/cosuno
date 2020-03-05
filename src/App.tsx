@@ -1,38 +1,23 @@
-import React, { ReactElement } from 'react'
-import { gql } from 'apollo-boost'
+import React, { ReactElement, Suspense } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-gql`
-    query Companies(
-        $search: String
-        $specialties: [Int!]
-        $pageSize: Int
-        $pageIndex: Int
-    ) {
-        companies(
-            search: $search
-            specialties: $specialties
-            pageSize: $pageSize
-            pageIndex: $pageIndex
-        ) {
-            page {
-                index
-                size
-                total
-            }
-            results {
-                id
-                name
-                logo
-                location
-                specialties {
-                    id
-                    name
-                }
-            }
-        }
-    }
-`
+import { Layout, Loading } from './components'
+import { routes } from './pages'
 
-export const App = (): ReactElement => {
-    return <></>
-}
+export const App = (): ReactElement => (
+    <BrowserRouter>
+        <Layout>
+            <Suspense fallback={<Loading />}>
+                <Switch>
+                    {routes.map((route, index) => (
+                        <Route
+                            key={`${route.path || index}`}
+                            exact={!!route.path}
+                            {...route}
+                        />
+                    ))}
+                </Switch>
+            </Suspense>
+        </Layout>
+    </BrowserRouter>
+)

@@ -61,11 +61,19 @@ export type Specialty = {
     name: Scalars['String']
 }
 
+export type SpecialtiesQueryVariables = {}
+
+export type SpecialtiesQuery = { __typename?: 'Query' } & {
+    specialties: Array<
+        { __typename?: 'Specialty' } & Pick<Specialty, 'id' | 'name'>
+    >
+}
+
 export type CompaniesQueryVariables = {
-    search: Maybe<Scalars['String']>
-    specialties: Maybe<Array<Scalars['Int']>>
-    pageSize: Maybe<Scalars['Int']>
-    pageIndex: Maybe<Scalars['Int']>
+    search: Scalars['String']
+    specialties: Array<Scalars['Int']>
+    pageSize: Scalars['Int']
+    pageIndex: Scalars['Int']
 }
 
 export type CompaniesQuery = { __typename?: 'Query' } & {
@@ -90,12 +98,66 @@ export type CompaniesQuery = { __typename?: 'Query' } & {
     }
 }
 
+export const SpecialtiesDocument = gql`
+    query Specialties {
+        specialties {
+            id
+            name
+        }
+    }
+`
+
+/**
+ * __useSpecialtiesQuery__
+ *
+ * To run a query within a React component, call `useSpecialtiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSpecialtiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSpecialtiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSpecialtiesQuery(
+    baseOptions?: ApolloReactHooks.QueryHookOptions<
+        SpecialtiesQuery,
+        SpecialtiesQueryVariables
+    >,
+) {
+    return ApolloReactHooks.useQuery<
+        SpecialtiesQuery,
+        SpecialtiesQueryVariables
+    >(SpecialtiesDocument, baseOptions)
+}
+export function useSpecialtiesLazyQuery(
+    baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+        SpecialtiesQuery,
+        SpecialtiesQueryVariables
+    >,
+) {
+    return ApolloReactHooks.useLazyQuery<
+        SpecialtiesQuery,
+        SpecialtiesQueryVariables
+    >(SpecialtiesDocument, baseOptions)
+}
+export type SpecialtiesQueryHookResult = ReturnType<typeof useSpecialtiesQuery>
+export type SpecialtiesLazyQueryHookResult = ReturnType<
+    typeof useSpecialtiesLazyQuery
+>
+export type SpecialtiesQueryResult = ApolloReactCommon.QueryResult<
+    SpecialtiesQuery,
+    SpecialtiesQueryVariables
+>
 export const CompaniesDocument = gql`
     query Companies(
-        $search: String
-        $specialties: [Int!]
-        $pageSize: Int
-        $pageIndex: Int
+        $search: String!
+        $specialties: [Int!]!
+        $pageSize: Int!
+        $pageIndex: Int!
     ) {
         companies(
             search: $search

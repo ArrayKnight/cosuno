@@ -45,7 +45,9 @@ export const companies: Company[] = new Array(
     .map((_, index) => ({
         id: index,
         name: capitalCase(lipsum.generateWords(Math.ceil(Math.random() + 0.5))),
-        logo: `https://picsum.photos/id/${index}/480/360`,
+        logo: `https://picsum.photos/id/${Math.round(
+            Math.random() * 1000,
+        )}/480/360`,
         location: [
             `${capitalCase(lipsum.generateWords(1))},`,
             lipsum
