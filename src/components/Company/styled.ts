@@ -37,6 +37,7 @@ export const Media = styled.div`
 export const CardMedia = styled(CardMediaBase)`
     width: 100%;
     height: 100%;
+    background: ${theme.palette.grey.A400};
     position: absolute;
     top: 0;
     right: 0;

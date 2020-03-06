@@ -20,9 +20,9 @@ export class CompanyService {
 
         return this.findAll().filter(
             (company) =>
-                (filterByName &&
-                    company.name.toLowerCase().includes(name.toLowerCase())) ||
-                (filterBySpecialties &&
+                (!filterByName ||
+                    company.name.toLowerCase().includes(name.toLowerCase())) &&
+                (!filterBySpecialties ||
                     company.specialties.some((id) => specialties.includes(id))),
         )
     }

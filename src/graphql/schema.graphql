@@ -1,5 +1,5 @@
 # source: http://localhost:3000/graphql/
-# timestamp: Tue Mar 03 2020 17:09:10 GMT-0800 (Pacific Standard Time)
+# timestamp: Thu Mar 05 2020 16:50:43 GMT-0800 (Pacific Standard Time)
 
 type Company {
     id: Int!
@@ -17,14 +17,19 @@ type CompanyDB {
     specialties: [Int!]!
 }
 
+type DataMetadata {
+    items: [Company!]!
+    total: Int!
+}
+
 type PageMetadata {
     index: Int!
     size: Int!
     total: Int!
 }
 
-type PaginatedCompanies {
-    results: [Company!]!
+type PaginatedData {
+    data: DataMetadata!
     page: PageMetadata!
 }
 
@@ -35,7 +40,7 @@ type Query {
         specialties: [Int!]
         pageIndex: Int
         pageSize: Int
-    ): PaginatedCompanies!
+    ): PaginatedData!
 }
 
 type Specialty {

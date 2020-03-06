@@ -41,6 +41,15 @@ export class Company {
 
 // TODO abstract out all pagination logic and models into generic implementation
 @ObjectType()
+export class DataMetadata {
+    @Field(() => [Company])
+    items: CompanyDB[]
+
+    @Field(() => Int)
+    total: number
+}
+
+@ObjectType()
 export class PageMetadata {
     @Field(() => Int)
     index: number
@@ -53,9 +62,9 @@ export class PageMetadata {
 }
 
 @ObjectType()
-export class PaginatedCompanies {
-    @Field(() => [Company])
-    results: CompanyDB[]
+export class PaginatedData {
+    @Field(() => DataMetadata)
+    data: DataMetadata
 
     @Field()
     page: PageMetadata

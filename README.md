@@ -34,5 +34,8 @@ Be sure to search through the code for `TODO`, but here are the highlights:
 -   Abstract Generic Logic: the pagination logic shouldn't be implemented directly in the Company resolver, it should be generic and re-useable for any resolver
 -   Operators & Sorting: add filtering operators to change the filtering behavior, add sorting options to switch between relevance & alpha
 -   Dev Experience: limit NestJS file watching to the `srv` folder only, it currently rebuilds the server on changes to any file in the repo
--   Build scripts: setup production deployment scripts with any additional tree shaking/optimizations
--   Offline GraphQL codegen: research if it's possible to do something similar to the introspection to generate hooks/schema without running the server
+-   Build Scripts: setup production deployment scripts with any additional tree shaking/optimizations
+-   Offline GraphQL Codegen: research if it's possible to do something similar to the introspection to generate hooks/schema without running the server
+-   Store & Cache: as the application grows, there's likely to be a need for a store, also if data is being updated regularly making sure to bypass cache appropriately or utilize subscriptions
+-   Lazy Loading: add intersection observer lazy loading on images with a gently fade in on load
+-   Skeleton: it would be cool to show a page skeleton of the results as the query is loading

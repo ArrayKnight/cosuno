@@ -38,7 +38,10 @@ export default memo(
                 errors={[companiesQuery.error, specialtiesQuery.error].filter(
                     Boolean,
                 )}
-                companies={companiesQuery.data?.companies.results || []}
+                data={{
+                    items: companiesQuery.data?.companies.data.items || [],
+                    total: companiesQuery.data?.companies.data.total || 0,
+                }}
                 page={
                     companiesQuery.data?.companies.page || {
                         index: 0,

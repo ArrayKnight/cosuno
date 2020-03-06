@@ -25,15 +25,18 @@ gql`
                 size
                 total
             }
-            results {
-                id
-                name
-                logo
-                location
-                specialties {
+            data {
+                items {
                     id
                     name
+                    logo
+                    location
+                    specialties {
+                        id
+                        name
+                    }
                 }
+                total
             }
         }
     }

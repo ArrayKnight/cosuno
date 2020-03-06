@@ -10,7 +10,7 @@ interface Props {
 
 export const Layout = memo(
     ({ header, children, footer }: Props): React.ReactElement => (
-        <Root maxWidth="xl">
+        <Root maxWidth="lg">
             {header}
             <Content>{children}</Content>
             {footer}

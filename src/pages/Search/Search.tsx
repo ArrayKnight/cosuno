@@ -4,7 +4,7 @@ import { ApolloError } from 'apollo-boost'
 import { Companies, Loading, MiniPage, SearchBar } from '~/components'
 import {
     CompaniesQueryVariables,
-    Company,
+    DataMetadata,
     PageMetadata,
     Specialty,
 } from '~/graphql'
@@ -13,7 +13,7 @@ import { Typography } from '@material-ui/core'
 interface Props {
     loading: boolean
     errors: ApolloError[]
-    companies: Company[]
+    data: DataMetadata
     page: PageMetadata
     specialties: Specialty[]
     setSearch: (search: CompaniesQueryVariables['search']) => void
@@ -28,7 +28,7 @@ export const Search = memo(
     ({
         loading,
         errors,
-        companies,
+        data,
         page,
         specialties,
         setSearch,
@@ -38,12 +38,13 @@ export const Search = memo(
     }: Props): ReactElement => (
         <>
             <SearchBar
+                loading={loading}
                 specialties={specialties}
                 setSearch={setSearch}
                 setSpecialties={setSpecialties}
             />
             <Companies
-                companies={companies}
+                data={data}
                 page={page}
                 setPageIndex={setPageIndex}
                 setPageSize={setPageSize}

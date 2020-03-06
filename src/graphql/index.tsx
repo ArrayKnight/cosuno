@@ -29,6 +29,12 @@ export type CompanyDb = {
     specialties: Array<Scalars['Int']>
 }
 
+export type DataMetadata = {
+    __typename?: 'DataMetadata'
+    items: Array<Company>
+    total: Scalars['Int']
+}
+
 export type PageMetadata = {
     __typename?: 'PageMetadata'
     index: Scalars['Int']
@@ -36,16 +42,16 @@ export type PageMetadata = {
     total: Scalars['Int']
 }
 
-export type PaginatedCompanies = {
-    __typename?: 'PaginatedCompanies'
-    results: Array<Company>
+export type PaginatedData = {
+    __typename?: 'PaginatedData'
+    data: DataMetadata
     page: PageMetadata
 }
 
 export type Query = {
     __typename?: 'Query'
     specialties: Array<Specialty>
-    companies: PaginatedCompanies
+    companies: PaginatedData
 }
 
 export type QueryCompaniesArgs = {
@@ -77,24 +83,26 @@ export type CompaniesQueryVariables = {
 }
 
 export type CompaniesQuery = { __typename?: 'Query' } & {
-    companies: { __typename?: 'PaginatedCompanies' } & {
+    companies: { __typename?: 'PaginatedData' } & {
         page: { __typename?: 'PageMetadata' } & Pick<
             PageMetadata,
             'index' | 'size' | 'total'
         >
-        results: Array<
-            { __typename?: 'Company' } & Pick<
-                Company,
-                'id' | 'name' | 'logo' | 'location'
-            > & {
-                    specialties: Array<
-                        { __typename?: 'Specialty' } & Pick<
-                            Specialty,
-                            'id' | 'name'
-                        >
-                    >
-                }
-        >
+        data: { __typename?: 'DataMetadata' } & Pick<DataMetadata, 'total'> & {
+                items: Array<
+                    { __typename?: 'Company' } & Pick<
+                        Company,
+                        'id' | 'name' | 'logo' | 'location'
+                    > & {
+                            specialties: Array<
+                                { __typename?: 'Specialty' } & Pick<
+                                    Specialty,
+                                    'id' | 'name'
+                                >
+                            >
+                        }
+                >
+            }
     }
 }
 
@@ -170,15 +178,18 @@ export const CompaniesDocument = gql`
                 size
                 total
             }
-            results {
-                id
-                name
-                logo
-                location
-                specialties {
+            data {
+                items {
                     id
                     name
+                    logo
+                    location
+                    specialties {
+                        id
+                        name
+                    }
                 }
+                total
             }
         }
     }
