@@ -7,13 +7,14 @@ import {
     MenuItem,
     OutlinedInput,
     Select,
+    Typography,
 } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
 
 import { PAGE_SIZES } from '~/common'
 import { CompaniesQueryVariables, DataMetadata, PageMetadata } from '~/graphql'
 import { Company } from '../Company'
-import { Footer, Root } from './styled'
+import { CountGrid, Footer, PaginationGrid, Root, SizeGrid } from './styled'
 
 interface Props {
     data: DataMetadata
@@ -55,34 +56,45 @@ export const Companies = memo(
                 </Grid>
                 {data.total > 0 && (
                     <Footer>
-                        <span>
-                            {page.index * page.size + 1} -{' '}
-                            {page.index * page.size + data.items.length} of{' '}
-                            {data.total}
-                        </span>
-                        <Pagination
-                            count={page.total}
-                            page={page.index + 1}
-                            onChange={updatePage}
-                        />
-                        <FormControl variant="outlined">
-                            <InputLabel ref={inputLabel} htmlFor={id}>
-                                Page Size
-                            </InputLabel>
-                            <Select
-                                input={
-                                    <OutlinedInput id={id} name="page-size" />
-                                }
-                                value={page.size}
-                                onChange={updateSize}
-                            >
-                                {PAGE_SIZES.map((size) => (
-                                    <MenuItem key={size} value={size}>
-                                        {size}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <Grid container alignItems="center" spacing={1}>
+                            <CountGrid item xs={6} md={3} lg={2}>
+                                <Typography variant="body2">
+                                    {page.index * page.size + 1} -{' '}
+                                    {page.index * page.size + data.items.length}{' '}
+                                    of {data.total}
+                                </Typography>
+                            </CountGrid>
+                            <PaginationGrid item xs={12} md={6} lg={8}>
+                                <Pagination
+                                    count={page.total}
+                                    page={page.index + 1}
+                                    onChange={updatePage}
+                                />
+                            </PaginationGrid>
+                            <SizeGrid item xs={6} md={3} lg={2}>
+                                <FormControl variant="outlined">
+                                    <InputLabel ref={inputLabel} htmlFor={id}>
+                                        Per Page
+                                    </InputLabel>
+                                    <Select
+                                        input={
+                                            <OutlinedInput
+                                                id={id}
+                                                name="page-size"
+                                            />
+                                        }
+                                        value={page.size}
+                                        onChange={updateSize}
+                                    >
+                                        {PAGE_SIZES.map((size) => (
+                                            <MenuItem key={size} value={size}>
+                                                {size}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </SizeGrid>
+                        </Grid>
                     </Footer>
                 )}
             </Root>

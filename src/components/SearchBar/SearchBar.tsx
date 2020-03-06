@@ -1,6 +1,7 @@
 import { isNull } from 'lodash'
 import React, {
     ChangeEvent,
+    FormEvent,
     memo,
     MouseEvent,
     ReactElement,
@@ -55,7 +56,9 @@ export const SearchBar = memo(
             }
         }
 
-        function search(): void {
+        function search(event: FormEvent<HTMLFormElement>): void {
+            event.preventDefault()
+
             setSearch(term)
             setSearched(term)
         }
@@ -83,7 +86,7 @@ export const SearchBar = memo(
 
         return (
             <Root>
-                <form noValidate autoComplete="off">
+                <form noValidate autoComplete="off" onSubmit={search}>
                     <TextField
                         label="Search"
                         size="small"
@@ -102,7 +105,7 @@ export const SearchBar = memo(
                                 term.trim().length === 0 || term === searched
                             }
                             size="small"
-                            onClick={search}
+                            type="submit"
                         >
                             <SearchTwoTone />
                         </Fab>
